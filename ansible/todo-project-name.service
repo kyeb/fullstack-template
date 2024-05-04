@@ -1,0 +1,11 @@
+[Unit]
+Description=TODO project name Backend Uvicorn Service
+After=network.target
+
+[Service]
+WorkingDirectory=/srv/backend
+ExecStart=/root/.local/bin/pdm run uvicorn todo_project_name.main:app --host 0.0.0.0 --port 8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

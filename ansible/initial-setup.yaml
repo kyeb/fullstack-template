@@ -1,0 +1,61 @@
+- name: Initial setup
+  hosts: servers
+
+  tasks:
+    - name: Install required packages
+      apt:
+        update_cache: yes
+        name:
+          - debian-keyring
+          - debian-archive-keyring
+          - apt-transport-https
+          - htop
+          - rsync
+          - python3-pip
+        state: present
+
+    - name: Add Cloudsmith repository
+      apt_key:
+        url: "https://dl.cloudsmith.io/public/caddy/stable/gpg.key"
+        state: present
+
+    - name: Add Caddy repository to sources list
+      apt_repository:
+        repo: "deb https://dl.cloudsmith.io/public/caddy/stable/deb/debian
+          any-version main"
+        state: present
+        filename: caddy-stable
+
+    - name: Add Caddy src repository to sources list
+      apt_repository:
+        repo: "deb-src https://dl.cloudsmith.io/public/caddy/stable/deb/debian
+          any-version main"
+        state: present
+        filename: caddy-stable
+
+    - name: Install Caddy
+      apt:
+        update_cache: yes
+        name: caddy
+        state: present
+
+    - name: Enable and start Caddy service
+      service:
+        name: caddy
+        enabled: yes
+        state: started
+
+    - name: Trust Caddy for local HTTPS
+      command: caddy trust
+
+    - name: Install pdm with pip
+      pip:
+        name: pdm
+        state: present
+        extra_args: --user
+
+    - name: Add pip's bin directory to PATH
+      copy:
+        dest: /etc/profile.d/set-path.sh
+        content: "PATH=$PATH:~/.local/bin"
+        mode: "0644"
