@@ -37,12 +37,12 @@
 
     - name: Update service configuration
       copy:
-        src: davinci-backend.service
-        dest: /etc/systemd/system/davinci-backend.service
+        src: todo-project-name.service
+        dest: /etc/systemd/system/todo-project-name.service
 
     - name: Restart and enable backend service
       systemd_service:
         daemon_reload: true
-        name: davinci-backend
+        name: todo-project-name
         enabled: yes
         state: restarted
