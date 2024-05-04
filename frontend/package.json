@@ -1,0 +1,27 @@
+{
+  "name": "todo-project-name",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "dev": "rm -rf .parcel-cache dist && parcel src/index.html",
+    "typecheck": "tsc --noEmit",
+    "build": "rm -rf .parcel-cache dist && parcel build src/index.html"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.12.0",
+    "@types/react": "^18.2.78",
+    "parcel": "^2.12.0",
+    "prettier": "^3.2.5",
+    "process": "^0.11.10",
+    "typescript": "^5.4.5",
+    "typescript-plugin-css-modules": "^5.1.0"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.10.1",
+    "graphql": "^16.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3"
+  },
+  "license": "MIT",
+  "packageManager": "yarn@4.1.1"
+}
