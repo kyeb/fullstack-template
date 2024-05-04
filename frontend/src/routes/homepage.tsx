@@ -7,12 +7,7 @@ const Homepage = () => {
 
   return (
     <div className={classes.container}>
-      <button
-        className="ui primary button main-button"
-        onClick={() => navigate("/other")}
-      >
-        Some other page
-      </button>
+      <button onClick={() => navigate("/other")}>Some other page</button>
     </div>
   );
 };
